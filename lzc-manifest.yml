@@ -1,0 +1,99 @@
+# Aether - AI API 管理平台
+# LazyCat Cloud Application Manifest (v1.4.1+)
+
+name: Aether
+package: community.lazycat.app.aether
+version: 0.4.10
+min_os_version: 1.3.8
+description: "Aether is an AI API management platform with multi-model support"
+license: MIT
+homepage: https://github.com/fawney19/aether
+author: fawney19
+
+application:
+  subdomain: aether
+  public_path:
+    - /
+  upstreams:
+    - location: /
+      backend: http://aether-app:80/
+
+services:
+  postgres:
+    image: registry.lazycat.cloud/czyt/library/postgres:579591ae5ab8739b
+    environment:
+      - POSTGRES_DB=aether
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=aether
+      - TZ=Asia/Shanghai
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - pg_isready -U postgres
+      interval: 20s
+      timeout: 30s
+      retries: 5
+    binds:
+      - /lzcapp/var/postgres:/var/lib/postgresql/data
+    cpu_shares: 512
+    mem_limit: 512M
+
+  redis:
+    image: registry.lazycat.cloud/czyt/library/redis:dac62363d7319757
+    command: redis-server --appendonly yes --requirepass aether
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - redis-cli --raw incr ping
+      interval: 20s
+      timeout: 30s
+      retries: 5
+    binds:
+      - /lzcapp/var/redis:/data
+    cpu_shares: 256
+    mem_limit: 256M
+
+  aether-app:
+    #  ghcr.io/fawney19/aether:0.4.10
+    image: registry.lazycat.cloud/czyt/fawney19/aether:0ab0dc697cde55bc
+    environment:
+      # Database connection
+      - DATABASE_URL=postgresql://postgres:aether@postgres:5432/aether
+      # Redis connection
+      - REDIS_URL=redis://:aether@redis:6379/0
+      # JWT and encryption keys (auto-generated stable secrets)
+      - JWT_SECRET_KEY={{ stable_secret "jwt_secret_key" }}
+      - ENCRYPTION_KEY={{ stable_secret "encryption_key" }}
+      # Admin account (user must configure)
+      - ADMIN_EMAIL={{.U.admin_email}}
+      - ADMIN_USERNAME={{.U.admin_username}}
+      - ADMIN_PASSWORD={{.U.admin_password}}
+      # Optional settings with defaults
+      - API_KEY_PREFIX={{.U.api_key_prefix}}
+      - LOG_LEVEL={{.U.log_level}}
+      - GUNICORN_WORKERS={{.U.gunicorn_workers}}
+      # Timezone and encoding
+      - TZ=Asia/Shanghai
+      - PYTHONIOENCODING=utf-8
+      - LANG=C.UTF-8
+      - LC_ALL=C.UTF-8
+    depends_on:
+      - postgres
+      - redis
+    binds:
+      - /lzcapp/var/logs:/app/logs
+    cpu_shares: 1024
+    mem_limit: 1024M
+
+locales:
+  en:
+    name: "Aether"
+    description: "Aether is an AI API management platform with multi-model support, user management, and API key management"
+  zh:
+    name: "Aether"
+    description: "Aether 是一个 AI API 管理平台，支持多模型、用户管理和 API Key 管理"
+
+unsupported_platforms:
+  - ios
+  - android
+  - tvos

@@ -1,0 +1,10 @@
+# Aether - LazyCat Build Configuration
+
+# Manifest file path
+manifest: ./lzc-manifest.yml
+
+# Output directory for lpk package
+pkgout: ./
+
+# Application icon (512x512 PNG required)
+icon: ./icon.png

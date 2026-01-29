@@ -1,0 +1,81 @@
+# Aether - Setup Wizard Configuration
+# User-configurable parameters for installation
+
+params:
+  # Admin account (required for initial setup)
+  - id: admin_email
+    type: string
+    name: "Admin Email"
+    description: "Administrator email address (used for initial setup only)"
+    default_value: "admin@example.com"
+    optional: false
+    placeholder: "admin@example.com"
+    regex: "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$"
+    regex_message: "Please enter a valid email address"
+
+  - id: admin_username
+    type: string
+    name: "Admin Username"
+    description: "Administrator username (used for initial setup only)"
+    default_value: "admin"
+    optional: false
+    placeholder: "admin"
+    regex: "^[a-zA-Z0-9_]{3,20}$"
+    regex_message: "Username must be 3-20 characters, letters, numbers and underscores only"
+
+  - id: admin_password
+    type: string
+    name: "Admin Password"
+    description: "Administrator password (used for initial setup only, can be changed in the system later)"
+    default_value: ""
+    optional: false
+    placeholder: "Enter a secure password (min 8 characters)"
+    regex: "^.{8,}$"
+    regex_message: "Password must be at least 8 characters"
+
+  # Optional settings
+  - id: api_key_prefix
+    type: string
+    name: "API Key Prefix"
+    description: "Prefix for generated API keys"
+    default_value: "sk"
+    optional: true
+    placeholder: "sk"
+
+  - id: log_level
+    type: string
+    name: "Log Level"
+    description: "Application log level"
+    default_value: "INFO"
+    optional: true
+    placeholder: "INFO"
+
+  - id: gunicorn_workers
+    type: number
+    name: "Worker Processes"
+    description: "Number of Gunicorn worker processes"
+    default_value: 4
+    optional: true
+    min: 1
+    max: 16
+
+locales:
+  zh:
+    admin_email:
+      name: "管理员邮箱"
+      description: "管理员邮箱地址（仅首次初始化时使用）"
+    admin_username:
+      name: "管理员用户名"
+      description: "管理员用户名（仅首次初始化时使用）"
+    admin_password:
+      name: "管理员密码"
+      description: "管理员密码（仅首次初始化时使用，创建后可在系统内修改）"
+    api_key_prefix:
+      name: "API Key 前缀"
+      description: "生成的 API Key 的前缀"
+    log_level:
+      name: "日志级别"
+      description: "应用日志级别（DEBUG, INFO, WARNING, ERROR）"
+    gunicorn_workers:
+      name: "工作进程数"
+      description: "Gunicorn 工作进程数量"
