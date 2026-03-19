@@ -3,7 +3,7 @@
 
 name: Aether
 package: community.lazycat.app.aether
-version: 0.5.1
+version: 0.6.1
 min_os_version: 1.3.8
 description: "Aether is an AI API management platform with multi-model support"
 license: MIT
@@ -54,8 +54,8 @@ services:
     mem_limit: 256M
 
   aether-app:
-    #  ghcr.io/fawney19/aether:0.5.1
-    image: registry.lazycat.cloud/czyt/fawney19/aether:b125f8b4c5423ae2
+    #  ghcr.io/fawney19/aether:0.6.1
+    image: registry.lazycat.cloud/czyt/fawney19/aether:41dbf1d90996b270
     environment:
       # Database connection
       - DATABASE_URL=postgresql://postgres:aether@postgres:5432/aether
