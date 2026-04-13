@@ -1,0 +1,28 @@
+# Aether - AI API 管理平台
+# LPK v2 Package Metadata
+
+package: community.lazycat.app.aether
+version: 0.6.3
+name: Aether
+description: "Aether is an AI API management platform with multi-model support"
+min_os_version: 1.5.0
+license: MIT
+homepage: https://github.com/fawney19/aether
+author: fawney19
+
+locales:
+  en:
+    name: "Aether"
+    description: "Aether is an AI API management platform with multi-model support, user management, and API key management"
+  zh:
+    name: "Aether"
+    description: "Aether 是一个 AI API 管理平台，支持多模型、用户管理和 API Key 管理"
+
+unsupported_platforms:
+  - ios
+  - android
+  - tvos
+
+permissions:
+  required:
+    - net.internet

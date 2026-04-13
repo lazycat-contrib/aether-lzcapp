@@ -1,14 +1,5 @@
 # Aether - AI API 管理平台
-# LazyCat Cloud Application Manifest (v1.4.1+)
-
-name: Aether
-package: community.lazycat.app.aether
-version: 0.6.1
-min_os_version: 1.3.8
-description: "Aether is an AI API management platform with multi-model support"
-license: MIT
-homepage: https://github.com/fawney19/aether
-author: fawney19
+# LazyCat Application Runtime Manifest (LPK v2)
 
 application:
   subdomain: aether
@@ -54,8 +45,8 @@ services:
     mem_limit: 256M
 
   aether-app:
-    #  ghcr.io/fawney19/aether:0.6.1
-    image: registry.lazycat.cloud/czyt/fawney19/aether:41dbf1d90996b270
+    # upstream: ghcr.io/fawney19/aether:0.6.3
+    image: registry.lazycat.cloud/czyt/fawney19/aether:db0aa8d385f581f7
     environment:
       # Database connection
       - DATABASE_URL=postgresql://postgres:aether@postgres:5432/aether
@@ -84,16 +75,3 @@ services:
       - /lzcapp/var/logs:/app/logs
     cpu_shares: 1024
     mem_limit: 1024M
-
-locales:
-  en:
-    name: "Aether"
-    description: "Aether is an AI API management platform with multi-model support, user management, and API key management"
-  zh:
-    name: "Aether"
-    description: "Aether 是一个 AI API 管理平台，支持多模型、用户管理和 API Key 管理"
-
-unsupported_platforms:
-  - ios
-  - android
-  - tvos

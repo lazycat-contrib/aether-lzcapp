@@ -1,6 +1,9 @@
-# Aether - LazyCat Build Configuration
+# Aether - LazyCat Build Configuration (LPK v2)
 
-# Manifest file path
+# Package metadata file (LPK v2 required)
+package: ./package.yml
+
+# Runtime manifest file
 manifest: ./lzc-manifest.yml
 
 # Output directory for lpk package
