@@ -1,0 +1,38 @@
+version: 1
+
+project:
+  root: .
+  build_config: lzc-build.yml
+  package_file: package.yml
+  output: dist/aether.lpk
+
+update:
+  strategy: publish
+  allow_downgrade: false
+  version_source:
+    type: image
+    image: aether
+
+build:
+  run_buildscript: false
+
+images:
+  - id: aether
+    target: service
+    service: aether-app
+    source: ghcr.io/fawney19/aether
+    channel: stable
+    tag_regex: '^v?[0-9]+\.[0-9]+\.[0-9]+$'
+    delivery:
+      mode: lazycat
+
+stores:
+  official:
+    enabled: true
+    skip_if_version_exists: true
+  private:
+    enabled: true
+    skip_if_version_exists: true
+    name: Aether
+    summary: 支持多模型、用户管理和 API Key 管理的 AI API 管理平台
+
