@@ -8,7 +8,6 @@ application:
   upstreams:
     - location: /
       backend: http://aether-app:80/
-
 services:
   postgres:
     image: registry.lazycat.cloud/czyt/library/postgres:579591ae5ab8739b
@@ -28,7 +27,6 @@ services:
       - /lzcapp/var/postgres:/var/lib/postgresql/data
     cpu_shares: 512
     mem_limit: 512M
-
   redis:
     image: registry.lazycat.cloud/czyt/library/redis:dac62363d7319757
     command: redis-server --appendonly yes --requirepass aether
@@ -43,10 +41,9 @@ services:
       - /lzcapp/var/redis:/data
     cpu_shares: 256
     mem_limit: 256M
-
   aether-app:
-    # upstream: ghcr.io/fawney19/aether:0.6.3
-    image: registry.lazycat.cloud/czyt/fawney19/aether:db0aa8d385f581f7
+    # upstream: ghcr.io/fawney19/aether:0.7.10
+    image: registry.lazycat.cloud/czyt/fawney19/aether:815b69aed781c239
     environment:
       # Database connection
       - DATABASE_URL=postgresql://postgres:aether@postgres:5432/aether
