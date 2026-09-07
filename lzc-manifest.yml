@@ -42,8 +42,8 @@ services:
     cpu_shares: 256
     mem_limit: 256M
   aether-app:
-    # upstream: ghcr.io/fawney19/aether:0.7.13
-    image: registry.lazycat.cloud/czyt/fawney19/aether:7ce2f048103c0bae
+    # upstream: ghcr.io/fawney19/aether:0.7.15
+    image: registry.lazycat.cloud/czyt/fawney19/aether:6ae0ffac02804ff6
     environment:
       # Database connection
       - DATABASE_URL=postgresql://postgres:aether@postgres:5432/aether

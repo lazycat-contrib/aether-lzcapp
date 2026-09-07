@@ -2,7 +2,7 @@
 # LPK v2 Package Metadata
 
 package: community.lazycat.app.aether
-version: 0.7.13
+version: 0.7.15
 name: Aether
 description: "Aether is an AI API management platform with multi-model support"
 min_os_version: 1.5.0
